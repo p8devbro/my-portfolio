@@ -1,7 +1,7 @@
 # my-portfolio
 # P8DevBro Portfolio
 
-![Portfolio Screenshot] <!--will be added soon-->
+![Portfolio Screenshotwill be added soon] <!--will be added soon-->
 
 A cutting-edge portfolio website featuring 3D animations, dark/light mode toggle, and interactive elements to showcase my full-stack development capabilities.
 
