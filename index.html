@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P8devBro - Fullstack Development Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://img.icons8.com/3d-fluency/94/rocket.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://img.icons8.com/3d-fluency/94/rocket.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://img.icons8.com/3d-fluency/94/rocket.png">
+    <link rel="stylesheet" href="https://unpkg.com/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    <link rel="manifest" href="/site.webmanifest">
+    <style>
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .gradient-bg {
+            background: linear-gradient(-45deg, #1a1a1a, #2d2d2d, #1a1a1a);
+            background-size: 400% 400%;
+            animation: gradientFlow 15s ease infinite;
+        }
+
+        .service-card {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) rotateX(10deg);
+            box-shadow: 0 25px 50px -12px rgba(99, 102, 241, 0.25);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .profile-pic {
+            width: 250px;
+            height: 250px;
+            border: 4px solid #6366f1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .testimonial-card {
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        /* New animations */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes rotating-words {
+            0%, 15% { opacity: 1; content: "Digital Innovation" }
+            33%, 48% { opacity: 1; content: "Business Growth" }
+            66%, 81% { opacity: 1; content: "Technical Excellence" }
+            100% { opacity: 0; content: "Future Solutions" }
+        }
+
+        .logo-animation span {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 5s steps(8) 1s 1 normal both;
+        }
+
+        .rotating-text::after {
+            content: "Digital Innovation";
+            animation: rotating-words 12s infinite;
+            display: inline-block;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            background-image: linear-gradient(to right, #6366f1, #8b5cf6);
+        }
+        .service-header {
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 15px 15px 0 0;
+        position: relative;
+    }
+
+    .service-icon {
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 60px;
+        background: #6366f1;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+
+    .service-list li {
+        position: relative;
+        padding-left: 30px;
+        margin-bottom: 12px;
+    }
+
+    .service-list li::before {
+        content: '\f058';
+        font-family: 'Font Awesome 5 Free';
+        position: absolute;
+        left: 0;
+        color: #6366f1;
+    }
+
+    .box-3d {
+        perspective: 1000px;
+        transform-style: preserve-3d;
+        transition: transform 0.3s;
+    }
+
+    .inner-3d {
+        transform: rotateX(-10deg) rotateY(10deg);
+        transition: all 0.3s;
+    }
+
+    .contact-container {
+        background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .contact-image {
+        background: url('https://cdn3d.iconscout.com/3d/premium/thumb/contact-us-3d-illustration-download-in-png-blend-fbx-gltf-file-formats--phone-telephone-communication-copywriting-pack-marketing-branding-illustrations-4568171.png?f=webp') center/cover no-repeat;
+        min-height: 400px;
+        position: relative;
+    }
+
+    .contact-image::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, #6366f155, #8b5cf655);
+
+    }
+     /* Custom animations */
+     @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .tech-hover {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .tech-hover:hover {
+        transform: translateY(-5px) scale(1.05);
+        filter: drop-shadow(0 8px 15px rgba(99, 102, 241, 0.3));
+    }
+
+    .achievement-hover {
+        transition: all 0.3s ease;
+    }
+
+    .achievement-hover:hover {
+        transform: translateX(10px);
+        background: linear-gradient(90deg, #1a1a1a, #2d2d2d);
+    }
+
+    .testimonial-hover {
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+    }
+
+    .testimonial-hover:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    .cert-hover {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-style: preserve-3d;
+    }
+
+    .cert-hover:hover {
+        transform: rotateY(10deg) rotateX(5deg) translateZ(10px);
+    }
+
+    .cert-hover::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, #6366f133, #8b5cf633);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .cert-hover:hover::after {
+        opacity: 1;
+    }
+
+    /* Light mode styles */
+.light-mode {
+    background: linear-gradient(-45deg, #f5f7fa, #e4e7eb, #f5f7fa);
+    background-size: 400% 400%;
+    animation: gradientFlow 15s ease infinite;
+    color: #1f2937;
+}
+
+.light-mode .gradient-bg {
+    background: linear-gradient(-45deg, #f5f7fa, #e4e7eb, #f5f7fa);
+    background-size: 400% 400%;
+    animation: gradientFlow 15s ease infinite;
+}
+
+.light-mode .service-card,
+.light-mode .tech-hover,
+.light-mode .achievement-hover,
+.light-mode .testimonial-card,
+.light-mode .cert-hover,
+.light-mode .contact-container,
+.light-mode footer {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #1f2937;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .text-gray-300 {
+    color: #4b5563;
+}
+
+.light-mode .bg-gray-800,
+.light-mode .bg-gray-800\/50,
+.light-mode .bg-gray-800\/70,
+.light-mode .bg-gray-800\/90 {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.light-mode input,
+.light-mode textarea {
+    background-color: #e5e7eb;
+    color: #1f2937;
+}
+
+.light-mode .bg-gray-900\/80 {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+html, body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+    /* Ensure content stays above 3D canvas */
+.container, section, nav, footer {
+    position: relative;
+    z-index: 1;
+}
+
+/* Make sure 3D background doesn't interfere with clicks */
+canvas {
+    pointer-events: none;
+}  
+/* Video Background Styles */
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.3;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Adjust opacity for light mode */
+.light-mode .hero-video {
+    opacity: 0.15;
+}
+
+.light-mode .hero-section::after {
+    background: rgba(255, 255, 255, 0.7);
+}  
+    </style>
+</head>
+<body class="gradient-bg text-gray-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="sticky top-0 bg-gray-900/80 backdrop-blur-sm z-50 shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent logo-animation">
+                P8devBro
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#services" class="hover:text-indigo-400 transition-colors">Services</a>
+                <a href="#tech" class="hover:text-indigo-400 transition-colors">Technologies</a>
+                <a href="#contact" class="hover:text-indigo-400 transition-colors">Contact</a>
+            </div>
+        <!--button id="theme-toggle" class="p-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors">
+                <i class="fas fa-sun text-yellow-300"></i>
+                <i class="fas fa-moon text-gray-300 hidden"></i>
+            </button>
+        </div-->
+    </nav>
+
+   <!-- Hero Section -->
+<section class="relative container mx-auto px-6 py-20 md:py-32 text-center overflow-hidden">
+    <!-- Video Background -->
+    <div class="absolute inset-0 z-0 overflow-hidden">
+        <video autoplay muted loop playsinline class="w-full h-full object-cover opacity-20">
+            <source src="https://videos.pexels.com/video-files/2278095/2278095-sd_640_360_30fps.mp4" type="video/mp4">
+            <!-- Fallback image if video doesn't load -->
+            <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55" alt="Fallback background" class="w-full h-full object-cover">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900/30 to-gray-900/80"></div>
+    </div>
+    
+    <!-- Content -->
+    <div class="relative z-10 max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            Fullstack Solutions for
+            <span class="rotating-text bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent"></span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 mb-8">
+            We transform ideas into scalable digital solutions. No project too big or small - 
+            <span class="text-indigo-400">we work with your budget</span> and deliver excellence.
+            Ready to tackle any challenge - let's create something amazing!
+        </p>
+        <a href="https://wa.me/09131278732" target="_blank" 
+           class="inline-block bg-gradient-to-r from-indigo-500 to-purple-600 px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-transform">
+            <i class="fab fa-whatsapp mr-2"></i>
+            Let's Work on a Project!
+        </a>
+    </div>
+</section>
+
+    <!-- Services Section -->
+    <section id="services" class="container mx-auto px-6 py-16">
+        <h2 class="text-3xl font-bold mb-12 text-center">Our Expertise</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Service cards updated with images -->
+            <div class="service-card bg-gray-800/50 rounded-xl">
+                <div class="service-header" style="background-image: url('https://cdn.dribbble.com/userupload/4952105/file/original-4088120ce9044a576e9d88c2b566e3d0.png')">
+                    <div class="service-icon">
+                        <i class="fas fa-shopping-cart text-white"></i>
+                    </div>
+                </div>
+                <div class="p-6 pt-12">
+                    <h3 class="text-xl font-bold mb-3">E-commerce Solutions</h3>
+                    <ul class="service-list text-gray-400">
+                        <li class="mb-2">Online Stores</li>
+                        <li class="mb-2">Payment Gateways</li>
+                        <li class="mb-2">Inventory Systems</li>
+                        <li>Marketplace Platforms</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="service-card bg-gray-800/50 rounded-xl">
+                <div class="service-header" style="background-image: url('https://img.freepik.com/premium-vector/fintech-financial-technology-online-banking-crowdfunding-business-investment-banking-payment-technology-concept-shape-polygonal-sphere-wireframe-hand-vector-illustration_127544-2016.jpg')">
+                    <div class="service-icon">
+                        <i class="fas fa-shopping-cart text-white"></i>
+                    </div>
+                </div>
+                <div class="p-6 pt-12">
+                    <h3 class="text-xl font-bold mb-3">Fin-tech & Banking</h3>
+                    <ul class="service-list text-gray-400">
+                        <li class="mb-2">Mobile Banking Apps</li>
+                        <li class="mb-2">Payment Processors</li>
+                        <li class="mb-2">Financial Dashboards</li>
+                        <li>Blockchain Solutions</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Service cards updated with images -->
+            <div class="service-card bg-gray-800/50 rounded-xl">
+                <div class="service-header" style="background-image: url('https://img.freepik.com/free-vector/flat-design-api-illustration_23-2149380374.jpg?semt=ais_hybrid&w=740')">
+                    <div class="service-icon">
+                        <i class="fas fa-shopping-cart text-white"></i>
+                    </div>
+                </div>
+                <div class="p-6 pt-12">
+                    <h3 class="text-xl font-bold mb-3">API Development</h3>
+                    <ul class="service-list text-gray-400">
+                        <li class="mb-2">RESTful APIs</li>
+                        <li class="mb-2">GraphQL Services</li>
+                        <li class="mb-2">WebSocket APIs</li>
+                        <li>Third-party Integrations</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Service cards updated with images -->
+            <div class="service-card bg-gray-800/50 rounded-xl">
+                <div class="service-header" style="background-image: url('https://thumbs.dreamstime.com/b/modern-medical-examination-style-hud-futuristic-medical-healthcare-interface-modern-medical-examination-style-162024399.jpg')">
+                    <div class="service-icon">
+                        <i class="fas fa-shopping-cart text-white"></i>
+                    </div>
+                </div>
+                <div class="p-6 pt-12">
+                    <h3 class="text-xl font-bold mb-3">Healthcare Tech</h3>
+                    <ul class="service-list text-gray-400">
+                        <li class="mb-2">Patient Portals</li>
+                        <li class="mb-2">Telemedicine Apps</li>
+                        <li class="mb-2">Medical Records Systems</li>
+                        <li>Appointment Schedulers</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Service cards updated with images -->
+            <div class="service-card bg-gray-800/50 rounded-xl">
+                <div class="service-header" style="background-image: url('https://media.istockphoto.com/id/1396113348/vector/3d-web-vector-illustrations-online-concept-computer-with-open-pages-e-learning-design-over.jpg?s=612x612&w=0&k=20&c=UuGSBpij7N-sZLRU-akf97-k7EexWmKgv15EgeApRy0=')">
+                    <div class="service-icon">
+                        <i class="fas fa-shopping-cart text-white"></i>
+                    </div>
+                </div>
+                <div class="p-6 pt-12">
+                    <h3 class="text-xl font-bold mb-3">EdTech Platforms</h3>
+                    <ul class="service-list text-gray-400">
+                        <li class="mb-2">LMS Systems</li>
+                        <li class="mb-2">Online Course Platforms</li>
+                        <li class="mb-2">Virtual Classrooms</li>
+                        <li>Learning Analytics</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Service cards updated with images -->
+            <div class="service-card bg-gray-800/50 rounded-xl">
+                <div class="service-header" style="background-image: url('https://img.freepik.com/free-vector/roboticist-concept-robotic-engineering-constructing-idea-artificial-intelligence-modeling-industry-automation-system-production-flate-vector-illustration_613284-1426.jpg?semt=ais_hybrid&w=740')">
+                    <div class="service-icon">
+                        <i class="fas fa-shopping-cart text-white"></i>
+                    </div>
+                </div>
+                <div class="p-6 pt-12">
+                    <h3 class="text-xl font-bold mb-3">Automation Systems</h3>
+                    <ul class="service-list text-gray-400">
+                        <li class="mb-2">Automation Systems</li>
+                        <li class="mb-2">CI/CD Pipelines</li>
+                        <li class="mb-2">Data Processing</li>
+                        <li class="mb-2">AI Integration</li>
+                    </ul>
+                </div>
+            </div>
+       
+        </div>
+    </section>
+    <!-- Chat Sidebar -->
+<div class="fixed bottom-6 right-6 z-50">
+    <!-- Main Button -->
+    <button id="chat-main-button" class="w-16 h-16 bg-indigo-600 rounded-full shadow-lg hover:bg-indigo-700 transition-all duration-300 flex items-center justify-center">
+        <i class="fas fa-comments text-white text-2xl"></i>
+    </button>
+    
+    <!-- Chat Options Panel -->
+    <div id="chat-options" class="hidden absolute bottom-20 right-0 w-56 bg-white rounded-lg shadow-xl p-4">
+        <h3 class="font-bold text-gray-800 mb-3">How can we help you?</h3>
+        
+        <button id="tawk-live-chat" class="w-full flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg transition">
+            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-comment-dots text-blue-600"></i>
+            </div>
+            <span class="text-left">
+                <span class="block font-medium text-gray-800">Live Chat</span>
+                <span class="block text-xs text-gray-500">Talk to our team</span>
+            </span>
+        </button>
+        
+        <a href="https://wa.me/09131278732" target="_blank" class="w-full flex items-center space-x-3 p-3 hover:bg-gray-100 rounded-lg transition mt-2">
+            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                <i class="fab fa-whatsapp text-green-600"></i>
+            </div>
+            <span class="text-left">
+                <span class="block font-medium text-gray-800">WhatsApp</span>
+                <span class="block text-xs text-gray-500">Instant messaging</span>
+            </span>
+        </a>
+    </div>
+</div>
+
+<script>
+    // Toggle chat options
+    const chatMainButton = document.getElementById('chat-main-button');
+    const chatOptions = document.getElementById('chat-options');
+    const tawkLiveChat = document.getElementById('tawk-live-chat');
+    
+    chatMainButton.addEventListener('click', () => {
+        chatOptions.classList.toggle('hidden');
+    });
+    
+    tawkLiveChat.addEventListener('click', () => {
+        if (typeof Tawk_API !== 'undefined') {
+            Tawk_API.toggle();
+        }
+        chatOptions.classList.add('hidden');
+    });
+    
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('#chat-main-button') && !e.target.closest('#chat-options')) {
+            chatOptions.classList.add('hidden');
+        }
+    });
+</script>
+
+    <!-- Core Technologies Section with Hover Effects -->
+<section id="tech" class="container mx-auto px-6 py-16">
+    <h2 class="text-3xl font-bold mb-12 text-center">Core Technologies</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="HTML5">
+            <span class="text-gray-300 text-sm">HTML5</span>
+        </div>
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="CSS">
+            <span class="text-gray-300 text-sm">CSS</span>
+        </div>
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="JavaScript">
+            <span class="text-gray-300 text-sm">JavaScript</span>
+        </div>
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="React">
+            <span class="text-gray-300 text-sm">React</span>
+        </div>
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://www.svgrepo.com/show/354113/nextjs-icon.svg" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="Next.js">
+            <span class="text-gray-300 text-sm">Next.js</span>
+        </div>
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Sass_Logo_Color.svg" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="Sass">
+            <span class="text-gray-300 text-sm">Sass</span>
+        </div>
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="Tailwind CSS">
+            <span class="text-gray-300 text-sm">Tailwind CSS</span>
+        </div>
+        
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="Node.js/Express">
+            <span class="text-gray-300 text-sm">Node.js/Express</span>
+        </div>
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="Python">
+            <span class="text-gray-300 text-sm">Python/Django</span>
+        </div>
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/MongoDB_Logo.svg" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="MongoDB">
+            <span class="text-gray-300 text-sm">MongoDB/Mongoose</span>
+        </div>
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://labs.mysql.com/common/logos/mysql-logo.svg" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="MySQL">
+            <span class="text-gray-300 text-sm">MySQL</span>
+        </div>
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="PostgreSQL">
+            <span class="text-gray-300 text-sm">PostgreSQL</span>
+        </div>
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="AWS">
+            <span class="text-gray-300 text-sm">AWS</span>
+        </div>
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="Docker">
+            <span class="text-gray-300 text-sm">Docker</span>
+
+        </div>
+        
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/db/Npm-logo.svg" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="npm">
+            <span class="text-gray-300 text-sm">npm</span>
+
+        </div>
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBRAqLE7sw7WAtdi-km2eHjqvADAQwZ6xQ57Le4Z2R5Z5bvcwFvDuhb4QiW1-nFqm3-y8&usqp=CAU" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="Yarn">
+            <span class="text-gray-300 text-sm">Yarn</span>
+
+        </div>
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://jwt.io/img/pic_logo.svg" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="JWT">
+            <span class="text-gray-300 text-sm">JWT</span>
+
+        </div>
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://oauth.net/images/oauth-2-sm.png" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="OAuth">
+            <span class="text-gray-300 text-sm">OAuth</span>
+
+        </div>
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://www.svgrepo.com/show/354512/vercel.svg" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="Vercel">
+            <span class="text-gray-300 text-sm">Vercel</span>
+
+        </div>
+        <div class="tech-hover p-4 flex flex-col items-center bg-gray-800/50 rounded-xl hover:bg-gray-800/70">
+            <img src="https://www.herokucdn.com/favicon.ico" 
+                 class="w-16 h-16 mb-2 hover:animate-float"
+                 alt="Heroku">
+            <span class="text-gray-300 text-sm">Heroku</span>
+
+        </div>
+        
+    </div>
+</section>
+
+<!-- About Section with Animated Achievements -->
+<section id="about" class="container mx-auto px-6 py-16">
+    <h2 class="text-3xl font-bold mb-12 text-center">About P8devBro</h2>
+    <div class="flex flex-col md:flex-row items-center gap-12">
+        <img src="data:image/jpeg;base64,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" 
+             class="w-64 h-64 rounded-full border-4 border-indigo-500 hover:border-purple-500 transition-all duration-500 ease-in-out"
+             alt="Gabriel">
+        <div>
+            <h3 class="text-3xl font-bold mb-6 text-indigo-400 ">From Vision to Reality: If you Can Dream It We Can Built It</h3>
+            <div class="space-y-4">
+                <div class="achievement-hover p-4 rounded-lg transition-all duration-300 cursor-default">
+                    <i class="fas fa-trophy text-indigo-400 mr-3 transition-transform duration-300"></i>
+                    Built core fin-tech systems for 1M+ users
+                </div>
+                <div class="achievement-hover p-4 rounded-lg transition-all duration-300 cursor-default">
+                    <i class="fas fa-trophy text-indigo-400 mr-3 transition-transform duration-300"></i>
+                    Built Automated News blog
+                </div>
+                <div class="achievement-hover p-4 rounded-lg transition-all duration-300 cursor-default">
+                    <i class="fas fa-trophy text-indigo-400 mr-3 transition-transform duration-300"></i>
+                    Build E-commerce website with 100+ products
+                </div>
+                <div class="achievement-hover p-4 rounded-lg transition-all duration-300 cursor-default">
+                    <i class="fas fa-trophy text-indigo-400 mr-3 transition-transform duration-300"></i>
+                    Build blockchain based voting system, NFT marketplace, crypto wallet/Exchange 
+                </div>
+                <div class="achievement-hover p-4 rounded-lg transition-all duration-300 cursor-default">
+                    <i class="fas fa-trophy text-indigo-400 mr-3 transition-transform duration-300"></i>
+                    Built AI based Chatbot
+                                   
+                </div>
+                <div class="achievement-hover p-4 rounded-lg transition-all duration-300 cursor-default">
+                    <i class="fas fa-trophy text-indigo-400 mr-3 transition-transform duration-300"></i>
+                    Built chrome extensions 
+                                   
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials with Staggered Hover Effects -->
+<section id="testimonials" class="container mx-auto px-6 py-16">
+    <h2 class="text-3xl font-bold mb-8 text-center"  >TESTIMONIALS</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="testimonial-hover bg-gray-800 p-6 rounded-xl hover:bg-gray-800/90 transition-delay-100">
+
+            <!-- Testimonial content -->
+            <div class="testimonial-hover bg-gray-800 p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                    <img src="https://randomuser.me/api/portraits/men/73.jpg" 
+                         alt="Aisha Patel" 
+                         class="w-12 h-12 rounded-full border-2 border-indigo-500">
+                    <div class="ml-4">
+                        <h4 class="font-bold">Kwame Asante Boateng</h4>
+                        <p class="text-indigo-400 text-sm">CTO, AfriTech Solutions</p>
+                    </div>
+                </div>
+                <p class="text-gray-300">
+                    "P8DevBro transformed our legacy system into a modern web app. His attention to detail is unmatched!"
+                </p>
+            </div>
+        </div>
+        <div class="testimonial-hover bg-gray-800 p-6 rounded-xl hover:bg-gray-800/90 transition-delay-200">
+            <!-- Testimonial content -->
+            <div class="testimonial-hover bg-gray-800 p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" 
+                         alt="Aisha Patel" 
+                         class="w-12 h-12 rounded-full border-2 border-indigo-500">
+                    <div class="ml-4">
+                        <h4 class="font-bold">Emily Grace Carter</h4>
+                        <p class="text-indigo-400 text-sm">Founder, StartUp Labs</p>
+                    </div>
+                </div>
+                <p class="text-gray-300">
+                    "He delivered our MVP in 4 weeks—clean code, great communication. A true professional."
+                </p>
+            </div>
+        </div>
+        <div class="testimonial-hover bg-gray-800 p-6 rounded-xl hover:bg-gray-800/90 transition-delay-300">
+            <!-- Testimonial content -->
+             <div class="testimonial-hover bg-gray-800 p-6 rounded-xl">
+    <div class="flex items-center mb-4">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" 
+             alt="Aisha Patel" 
+             class="w-12 h-12 rounded-full border-2 border-indigo-500">
+        <div class="ml-4">
+            <h4 class="font-bold">Carlos Miguel Rivera </h4>
+            <p class="text-indigo-400 text-sm">DevOps Lead, CloudNova</p>
+        </div>
+    </div>
+    <p class="text-gray-300">
+        "Automated our deployment with Docker + AWS. Saved us 20+ hours/month, Highly recommend!"
+    </p>
+</div>
+        </div>
+    </div>
+</section>
+<h2 class="text-3xl font-bold mb-8 text-center">CERTIFICATIONS</h2>
+<!-- Certifications with 3D Hover Effect -->
+<section id="certifications" class="container mx-auto px-6 py-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="cert-hover relative bg-gray-800 p-6 rounded-xl cursor-default overflow-hidden">
+            <div class="relative z-10">
+                <img src="https://img.icons8.com/color/96/amazon-web-services.png"
+                     class="w-16 h-16 mx-auto mb-4 hover:scale-110 transition-transform">
+                <h3 class="font-bold mb-1">AWS Certified</h3>
+                <p class="text-sm text-indigo-400">Solutions Architect</p>
+            </div>
+        </div>
+        <div class="cert-hover relative bg-gray-800 p-6 rounded-xl cursor-default overflow-hidden">
+            <div class="relative z-10">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/39/FreeCodeCamp_logo.png"
+                     class="w-16 h-16 mx-auto mb-4 hover:scale-110 transition-transform">
+                <h3 class="font-bold mb-1">FreeCodeCamp</h3>
+                <p class="text-sm text-indigo-400">full-stack developer</p>
+            </div>
+        </div>
+        <div class="cert-hover relative bg-gray-800 p-6 rounded-xl cursor-default overflow-hidden">
+            <div class="relative z-10">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg"
+                     class="w-16 h-16 mx-auto mb-4 hover:scale-110 transition-transform">
+                <h3 class="font-bold mb-1">Microsoft Certified</h3>
+                <p class="text-sm text-indigo-400">Azure Developer Associate</p>
+            </div>
+        </div>
+        <div class="cert-hover relative bg-gray-800 p-6 rounded-xl cursor-default overflow-hidden">
+            <div class="relative z-10">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg"
+                     class="w-16 h-16 mx-auto mb-4 hover:scale-110 transition-transform">
+                <h3 class="font-bold mb-1">Google Cloud</h3>
+                <p class="text-sm text-indigo-400">Professional Cloud Developer</p>
+            </div>
+        </div>
+        <div class="cert-hover relative bg-gray-800 p-6 rounded-xl cursor-default overflow-hidden">
+            <div class="relative z-10">
+                <img src="https://static.thenounproject.com/png/487779-200.png"
+                     class="w-16 h-16 mx-auto mb-4 hover:scale-110 transition-transform">
+                <h3 class="font-bold mb-1">Front-end</h3>
+                <p class="text-sm text-indigo-400">front-end Developer</p>
+            </div>
+        </div>
+        <!-- Repeat for other certifications -->
+    </div>
+</section>
+            <h2 class="text-3xl font-bold mb-8 text-center">CONTACT US</h2>
+    <!-- Contact Form Section -->
+    <section id="contact" class="container mx-auto px-6 py-16">
+        <div class="contact-container flex flex-col md:flex-row">
+            <div class="md:w-1/2 3d-box">
+                <div class="contact-image 3d-inner h-full"></div>
+            </div>
+            
+            <div class="md:w-1/2 p-8">
+            <form action="https://formspree.io/f/mrbqlpoz" method="POST" class="space-y-6">
+            <form action="https://formspree.io/f/mrbqlpoz" method="POST" class="space-y-6">
+                <div>
+                    <label class="block text-gray-300 mb-2">Your Name</label>
+                    <input type="text" name="name" required 
+                           class="w-full bg-gray-700 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-gray-300 mb-2">Your Email</label>
+                    <input type="email" name="email" required 
+                           class="w-full bg-gray-700 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-gray-300 mb-2">Message</label>
+                    <textarea name="message" rows="5" required 
+                              class="w-full bg-gray-700 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
+                </div>
+                <button type="submit" 
+                        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900/80 mt-20 py-12">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-center md:text-left mb-6 md:mb-0">
+                    <div class="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent mb-4">
+                        P8devBro
+                    </div>
+                    <p class="text-gray-400">
+                        © 2025 P8devBro. All rights reserved.<br>
+                        <a href="mailto:p8devbro@gmail.com" class="hover:text-indigo-400">p8devbro@gmail.com</a>
+                    </p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/p8devbro" target="_blank" class="text-gray-400 hover:text-indigo-400 text-2xl">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/p8devbro" target="_blank" class="text-gray-400 hover:text-indigo-400 text-2xl">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://twitter.com/p8devbro" target="_blank" class="text-gray-400 hover:text-indigo-400 text-2xl">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://facebook.com/p8devbro" target="_blank" class="text-gray-400 hover:text-indigo-400 text-2xl">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Modify your initFloatingObjects function to adjust colors based on theme
+        function initFloatingObjects() {
+            // Adjust colors based on theme
+    const isLight = document.documentElement.classList.contains('light-mode');
+    const colors = isLight ? 
+        [0x6366f1, 0x8b5cf6, 0xec4899, 0x10b981] : 
+        [0xa78bfa, 0xc084fc, 0xf472b6, 0x34d399];
+
+        renderer.domElement.style.opacity = isLight ? '0.3' : '0.5';
+
+            
+
+        // Add theme change listener to update 3D objects when theme changes
+document.addEventListener('themeChanged', initFloatingObjects);
+
+// Modify your theme toggle to dispatch this event
+themeToggle.addEventListener('click', () => {
+    // ... existing theme toggle code ...
+    document.dispatchEvent(new Event('themeChanged'));
+});
+    
+    
+        // Rotating text animation
+        const rotatingText = document.querySelector('.rotating-text');
+        const words = ["Digital Innovation", "Business Growth", "Technical Excellence", "Future Solutions"];
+        let currentIndex = 0;
+
+        setInterval(() => {
+            currentIndex = (- 1) % words.length;
+            rotatingText.textContent = words[currentIndex];
+        }, 3000);
+
+        // Tech Stack Data
+        const techStack = [
+            { name: 'React', icon: 'fa-react' },
+            { name: 'Node.js', icon: 'fa-node' },
+            { name: 'Python', icon: 'fa-python' },
+            { name: 'MongoDB', icon: 'fa-database' },
+            { name: 'MySQL', icon: 'fa-database' },
+            { name: 'PostgreSQL', icon: 'fa-database' },
+            { name: 'HTML5', icon: 'fa-html5' },
+            { name: 'CSS3', icon: 'fa-css3' },
+            { name: 'JavaScript', icon: 'fa-js' },
+            { name: 'Next.js', icon: 'fa-js' }
+        ];
+
+        // Render Services
+        const servicesContainer = document.querySelector('#services .grid');
+        services.forEach(service => {
+            const card = `
+                <div class="service-card bg-gray-800/50 p-6 rounded-xl">
+                    <i class="${service.icon} text-indigo-400 text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">${service.title}</h3>
+                    <ul class="list-disc list-inside text-gray-400">
+                        ${service.items.map(item => `<li class="mb-2">${item}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            servicesContainer.innerHTML += card;
+        });
+
+        // Render Tech Stack
+        const techContainer = document.querySelector('#tech-stack');
+        techStack.forEach(tech => {
+            const techItem = `
+                <div class="bg-gray-800 px-6 py-3 rounded-full flex items-center gap-2 hover:scale-110 transition-transform">
+                    <i class="${tech.icon} text-indigo-400"></i>
+                    <span>${tech.name}</span>
+                </div>
+            `;
+            techContainer.innerHTML += techItem;
+        });
+        // Add to existing data
+        const testimonials = [
+            {
+                name: "Marcus Johnson",
+                role: "CEO, HealthTech Innovations",
+                text: "P8devBro transformed our legacy system into a modern marvel. Their team's attention to detail and problem-solving skills are unmatched in the industry."
+            },
+            // Add more testimonials
+        ];
+
+        const certifications = [
+            {
+                icon: "fa-aws",
+                title: "AWS Certified",
+                subtitle: "Solutions Architect",
+                year: "2023"
+            },
+            // Add more certifications
+        ];
+
+        
+        // Add Intersection Observer for fade-in effects
+        let observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+         // 3D Image Interaction
+    const box = document.querySelector('.3d-box');
+    const inner = document.querySelector('.3d-inner');
+
+    document.addEventListener('mousemove', (e) => {
+        const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+        const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+        
+        inner.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    });
+
+    box.addEventListener('mouseenter', () => {
+        inner.style.transition = 'all 0.1s ease';
+    });
+
+    box.addEventListener('mouseleave', () => {
+        inner.style.transform = 'rotateY(0) rotateX(0)';
+        inner.style.transition = 'all 0.5s ease';
+    });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+}
+        
+    
+
+    // Enhanced 3D Floating Objects positioned near page sections
+    function initFloatingObjects() {
+        // Create scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.domElement.style.position = 'fixed';
+        renderer.domElement.style.top = '0';
+        renderer.domElement.style.left = '0';
+        renderer.domElement.style.zIndex = '-1';
+        renderer.domElement.style.pointerEvents = 'none';
+        document.body.appendChild(renderer.domElement);
+
+        // Create objects for different sections
+        const sections = [
+            { id: 'hero', count: 3, yOffset: 0.3 },
+            { id: 'services', count: 4, yOffset: 0.5 },
+            { id: 'tech', count: 5, yOffset: 0.4 },
+            { id: 'about', count: 2, yOffset: 0.6 },
+            { id: 'testimonials', count: 3, yOffset: 0.5 },
+            { id: 'certifications', count: 4, yOffset: 0.4 },
+            { id: 'contact', count: 3, yOffset: 0.7 }
+        ];
+
+        const objects = [];
+        const colors = [0x6366f1, 0x8b5cf6, 0xec4899, 0x10b981];
+        const isLight = document.documentElement.classList.contains('light-mode');
+        renderer.domElement.style.opacity = isLight ? '0.3' : '0.5';
+
+        sections.forEach(section => {
+            const element = document.getElementById(section.id);
+            if (!element) return;
+
+            for (let i = 0; i < section.count; i++) {
+                const geometry = createRandomGeometry();
+                const material = new THREE.MeshBasicMaterial({ 
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    transparent: true,
+                    opacity: 0.6
+                });
+                const mesh = new THREE.Mesh(geometry, material);
+
+                // Position near the section
+                const rect = element.getBoundingClientRect();
+                const x = (rect.left + rect.width * Math.random()) / window.innerWidth * 20 - 10;
+                const y = (rect.top + rect.height * section.yOffset) / window.innerHeight * 20 - 10;
+                const z = Math.random() * 10 - 20;
+
+                mesh.position.set(x, -y, z);
+                
+                // Random rotation and scale
+                mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+                const scale = Math.random() * 0.5 + 0.5;
+                mesh.scale.set(scale, scale, scale);
+                
+                scene.add(mesh);
+                objects.push({
+                    mesh,
+                    originalY: y,
+                    speed: Math.random() * 0.002 + 0.001,
+                    rotationSpeed: Math.random() * 0.01 + 0.005
+                });
+            }
+        });
+
+        // Camera position
+        camera.position.z = 5;
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            // Update object positions and rotations
+            objects.forEach(obj => {
+                obj.mesh.rotation.x += obj.rotationSpeed;
+                obj.mesh.rotation.y += obj.rotationSpeed;
+                
+                // Float up and down
+                obj.mesh.position.y = -obj.originalY + Math.sin(Date.now() * obj.speed) * 0.5;
+            });
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            repositionObjects();
+        });
+
+        // Reposition objects when scrolling
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const now = Date.now();
+            if (now - lastScroll > 100) {
+                lastScroll = now;
+                repositionObjects();
+            }
+        });
+
+        function repositionObjects() {
+            sections.forEach(section => {
+                const element = document.getElementById(section.id);
+                if (!element) return;
+
+                const sectionObjects = objects.filter((_, i) => 
+                    i >= sections.findIndex(s => s.id === section.id) && 
+                    i < sections.findIndex(s => s.id === section.id) + section.count
+                );
+
+                const rect = element.getBoundingClientRect();
+                sectionObjects.forEach((obj, i) => {
+                    const x = (rect.left + rect.width * (i / section.count)) / window.innerWidth * 20 - 10;
+                    const y = (rect.top + rect.height * section.yOffset) / window.innerHeight * 20 - 10;
+                    obj.mesh.position.x = x;
+                    obj.originalY = y;
+                });
+            });
+        }
+
+        function createRandomGeometry() {
+            const randomType = Math.floor(Math.random() * 3);
+            
+            if (randomType === 0) {
+                return new THREE.ConeGeometry(0.5, 1, 4);
+            } else if (randomType === 1) {
+                return new THREE.TorusGeometry(0.5, 0.2, 16, 32);
+            } else {
+                // Create an arrow shape
+                const arrowShape = new THREE.Shape();
+                arrowShape.moveTo(0, 0);
+                arrowShape.lineTo(0.5, 0);
+                arrowShape.lineTo(0.5, 0.2);
+                arrowShape.lineTo(1, 0);
+                arrowShape.lineTo(0.5, -0.2);
+                arrowShape.lineTo(0.5, 0);
+                return new THREE.ExtrudeGeometry(arrowShape, { depth: 0.1 });
+            }
+        }
+    }
+
+    // Initialize when page loads
+    window.addEventListener('load', () => {
+        initFloatingObjects();
+        
+        // Reinitialize when theme changes
+        document.addEventListener('themeChanged', () => {
+            const renderer = document.querySelector('canvas');
+            if (renderer) document.body.removeChild(renderer);
+            initFloatingObjects();
+        });
+    });
+
+    // Handle video background
+function initVideoBackground() {
+    const video = document.querySelector('.hero-section video');
+    if (video) {
+        // Ensure video plays properly on mobile
+        video.playsInline = true;
+        video.muted = true;
+        
+        // Attempt to play (some browsers require this)
+        const playPromise = video.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log('Video autoplay prevented, showing fallback');
+                video.controls = false;
+            });
+        }
+    }
+}
+
+// Call this in your window load event
+window.addEventListener('load', () => {
+    initFloatingObjects();
+    initVideoBackground();
+});
+
+</script>
+</body>
+</html>
