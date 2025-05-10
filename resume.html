@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gabriel Ikechukwu – Resume</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; line-height: 1.5; }
+    .container { display: flex; min-height: 100vh; }
+    .sidebar {
+      width: 100px; /* Reduced width to fit single page */
+      background-color: #0052cc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px; /* Reduced padding */
+    }
+    .sidebar img {
+      width: 80px; /* Scaled down image */
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid white;
+    }
+    .content {
+      flex: 1;
+      padding: 40px; /* Reduced padding */
+    }
+    .content h1 {
+      font-size: 28px; /* Slightly smaller heading */
+      margin-bottom: 10px;
+      color: #0052cc;
+      
+    }
+    .contact {
+      font-size: 12px; /* Reduced font size */
+      margin-bottom: 20px;
+      color: #555;
+    }
+    .downloads {
+      margin-bottom: 20px; /* Reduced margin */
+    }
+    .downloads button {
+      display: inline-block;
+      margin-right: 10px;
+      padding: 6px 10px;
+      background-color: #0052cc;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 12px; /* Smaller button text */
+      cursor: pointer;
+    }
+    .section {
+      margin-bottom: 20px; /* Reduced section spacing */
+    }
+    .section h2 {
+      font-size: 18px; /* Smaller section titles */
+      margin-bottom: 8px;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 4px;
+      color: #333;
+    }
+    .section p,
+    .section ul,
+    .section li {
+      margin-bottom: 6px;
+      font-size: 12px; /* Reduced text size */
+      color: #444;
+    }
+    .section ul {
+      list-style-type: disc;
+      padding-left: 15px; /* Adjusted list indent */
+    }
+  </style>
+  <!-- Include html2pdf library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <img src="data:image/jpeg;base64,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" alt="Gabriel Ikechukwu Headshot">
+    </div>
+    <div class="content">
+      <h1>Gabriel Ikechukwu</h1>
+      <div class="contact">
+        Akwa Ibom, Nigeria | +234 913 1278 732 | p8devbro@gmail.com<br>
+        LinkedIn: <a href="https://linkedin.com/in/gabrielikechukwu-p8DevBro">linkedin.com/in/gabrielikechukwu-p8DevBro</a> | 
+        GitHub: <a href="https://github.com/p8devbro">github.com/p8devbro</a>
+      </div>
+      <div class="downloads">
+        <button onclick="downloadPDF()">Download as PDF</button>
+      </div>
+      <div class="section">
+        <h2>Professional Summary</h2>
+        <p>Results-driven software engineer with 5+ years of experience building scalable web applications and services. Proven track record of improving system performance, leading cross-functional teams, and delivering projects ahead of schedule. Passionate about clean code, test-driven development, and solving real-world problems.</p>
+      </div>
+      <div class="section">
+        <h2>Technical Skills</h2>
+        <ul>
+          <li><strong>Languages:</strong> HTML, CSS, JavaScript, Python, SQL</li>
+          <li><strong>Frameworks:</strong> React, Node.js, Express, Django</li>
+          <li><strong>Tools:</strong> Git, Docker, AWS, PostgreSQL, MongoDB</li>
+        </ul>
+      </div>
+      <div class="section">
+        <h2>Professional Experience</h2>
+        <p><strong>Software Engineer</strong><br>
+        P8.Solutions – Abuja, Nigeria | Jan 2021 – Dec 2023</p>
+        <ul>
+          <li>Led migration of a monolithic application to microservices architecture, reducing server downtime by 35%.</li>
+          <li>Implemented automated testing pipelines (Jenkins + Jest), improving code coverage from 60% to 90%.</li>
+          <li>Collaborated with UI/UX designers to revamp the frontend using React and TailwindCSS, improving user engagement by 25%.</li>
+        </ul>
+        <p><strong>Full Stack Developer</strong><br>
+        DE-paytun Resources Ltd – Remote | Jul 2023 – Dec 2023</p>
+        <ul>
+          <li>Developed RESTful APIs and integrated third-party services (Paystack, Moniepoint) for an e-commerce platform with 50K+ users.</li>
+          <li>Optimized SQL queries and caching strategy, improving page load speed by 40%.</li>
+          <li>Participated in Agile sprints and worked cross-functionally with QA and product teams.</li>
+        </ul>
+      </div>
+      <div class="section">
+        <h2>Education</h2>
+        <p>B.Sc. in Human Physiology | University of Uyo | Graduated 2020</p>
+      </div>
+      <div class="section">
+        <h2>Projects</h2>
+        <p><strong>Open-Source Task Manager</strong></p>
+        <ul>
+          <li>Built a task management app using React, Node.js, and MongoDB; starred by 300+ GitHub users.</li>
+          <li>Deployed with Docker on AWS and implemented JWT-based authentication.</li>
+        </ul>
+      </div>
+      <div class="section">
+        <h2>Certifications</h2>
+        <ul>
+          <li>AWS Certified Developer – Associate</li>
+          <li>Scrum Master Certified (SMC)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script>
+    function downloadPDF() {
+      // Hide download button before generating PDF
+      const downloads = document.querySelector('.downloads');
+      downloads.style.display = 'none';
+
+      const element = document.querySelector('.container');
+      html2pdf().set({
+        margin: 0.5,
+        filename: 'Gabriel_Ikechukwu_Resume.pdf',
+        html2canvas: { scale: 2 }
+      }).from(element).save()
+      .then(() => {
+        // Restore download button after PDF generation
+        downloads.style.display = 'block';
+      });
+    }
+  </script>
+</body>
+</html>
